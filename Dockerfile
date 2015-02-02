@@ -40,7 +40,6 @@ ADD crons/ /etc/cron.hourly/
 WORKDIR /data
 
 VOLUME ["/etc/logstash/conf.d"]
-VOLUME ["/etc/nginx"]
 
 EXPOSE 80 443
 
