@@ -1,2 +1,0 @@
-# Flask output patterns
-FLASKDATE %{MONTHDAY}/%{MONTH}/%{YEAR}\s%{TIME}
