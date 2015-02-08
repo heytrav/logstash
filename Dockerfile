@@ -35,6 +35,8 @@ RUN \
   rm -fr /tmp/pip-* 
 
 ADD supervisord.conf /etc/supervisor/conf.d/
+ADD conf.d/ /etc/logstash/conf.d/
+ADD patterns /data/
 ADD crons/ /etc/cron.hourly/
 
 WORKDIR /data
