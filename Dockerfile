@@ -32,7 +32,6 @@ ADD http://download.elasticsearch.org/logstash/logstash/logstash-contrib-$LOGSTA
 RUN \
   cd /opt && tar xvzf  logstash-contrib-$LOGSTASH_VERSION.tar.gz -C logstash --strip-components=1 && \
   pip install -I elasticsearch-curator &&  \
-  mkdir -p /etc/logstash/{patterns,conf.d} && \
   rm -fr /tmp/pip-* 
 
 ADD supervisord.conf /etc/supervisor/conf.d/
