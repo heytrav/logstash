@@ -31,15 +31,15 @@ RUN \
 ADD http://download.elasticsearch.org/logstash/logstash/logstash-contrib-$LOGSTASH_VERSION.tar.gz /opt/
 RUN \
   cd /opt && tar xvzf  logstash-contrib-$LOGSTASH_VERSION.tar.gz -C logstash --strip-components=1 && \
-  pip install  elasticsearch-curator  || true &&  \
+  pip install -I elasticsearch-curator &&  \
   rm -fr /tmp/pip-* 
 
 ADD supervisord.conf /etc/supervisor/conf.d/
-ADD conf.d/ /etc/logstash/conf.d/
-ADD patterns /data/
 ADD crons/ /etc/cron.hourly/
 
 WORKDIR /data
+ADD patterns /data/
+ADD conf.d/ /etc/logstash/conf.d/
 
 VOLUME ["/etc/logstash/conf.d"]
 
