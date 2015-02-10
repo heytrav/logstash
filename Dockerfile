@@ -39,5 +39,7 @@ ADD logstash/ /etc/logstash/
 VOLUME ["/etc/logstash/conf.d"]
 
 EXPOSE 80 443
+WORKDIR /usr/local
+ADD docker_start.sh /usr/local/
 
 CMD ["./docker_start.sh"]
