@@ -1,9 +1,6 @@
 FROM ubuntu:trusty
 MAINTAINER Travis Holton <travis@ideegeo.com>
 
-
-MAINTAINER Travis Holton <travis@ideegeo.com>
-
 RUN echo '#!/bin/sh\nexit 101' > /usr/sbin/policy-rc.d && \
     chmod +x /usr/sbin/policy-rc.d
 
@@ -32,7 +29,7 @@ ADD http://download.elasticsearch.org/logstash/logstash/logstash-contrib-$LOGSTA
 RUN \
   cd /opt && tar xvzf  logstash-contrib-$LOGSTASH_VERSION.tar.gz -C logstash --strip-components=1 && \
   pip install -I elasticsearch-curator &&  \
-  rm -fr /tmp/pip-* 
+  rm -fr /tmp/pip-*
 
 ADD supervisord.conf /etc/supervisor/conf.d/
 ADD crons/ /etc/cron.hourly/
@@ -43,4 +40,4 @@ VOLUME ["/etc/logstash/conf.d"]
 
 EXPOSE 80 443
 
-CMD ["/usr/bin/supervisord"]
+CMD ["./docker_start.sh"]
