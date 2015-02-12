@@ -21,15 +21,15 @@ RUN \
                       curl \
                       python-pip \
                       unzip && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/*  /var/tmp/*
+  pip install -I elasticsearch-curator &&  \
+  rm -rf /var/lib/apt/lists/* /tmp /var/tmp/* && \
+  apt-get -y autoremove && \
+  apt-get autoclean
 
 # Install logstash contributed libraries
 ADD http://download.elasticsearch.org/logstash/logstash/logstash-contrib-$LOGSTASH_VERSION.tar.gz /opt/
-RUN \
-  cd /opt && tar xvzf  logstash-contrib-$LOGSTASH_VERSION.tar.gz -C logstash --strip-components=1 && \
-  pip install -I elasticsearch-curator &&  \
-  rm -fr /tmp/*
+RUN cd /opt && \
+   tar xvzf  logstash-contrib-$LOGSTASH_VERSION.tar.gz -C logstash --strip-components=1
 
 ADD supervisord.conf /etc/supervisor/conf.d/
 ADD crons/ /etc/cron.hourly/
