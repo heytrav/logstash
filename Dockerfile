@@ -18,6 +18,7 @@ RUN \
   apt-get -qq update && \
   apt-get -qy install supervisor \
                       logstash \
+                      logstash-contrib \
                       curl \
                       python-pip \
                       unzip && \
@@ -25,11 +26,6 @@ RUN \
   rm -rf /var/lib/apt/lists/* /tmp /var/tmp/* && \
   apt-get -y autoremove && \
   apt-get autoclean
-
-# Install logstash contributed libraries
-ADD http://download.elasticsearch.org/logstash/logstash/logstash-contrib-$LOGSTASH_VERSION.tar.gz /opt/
-RUN cd /opt && \
-   tar xvzf  logstash-contrib-$LOGSTASH_VERSION.tar.gz -C logstash --strip-components=1
 
 ADD supervisord.conf /etc/supervisor/conf.d/
 ADD crons/ /etc/cron.hourly/
