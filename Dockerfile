@@ -21,7 +21,8 @@ RUN \
                       logstash-contrib \
                       curl \
                       python-pip \
-                      unzip && \
+                      unzip \
+                      inotify-tools && \
   pip install -I elasticsearch-curator &&  \
   apt-get -y autoremove && \
   apt-get autoclean
