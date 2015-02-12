@@ -23,7 +23,6 @@ RUN \
                       python-pip \
                       unzip && \
   pip install -I elasticsearch-curator &&  \
-  rm -rf /var/lib/apt/lists/* /tmp /var/tmp/* && \
   apt-get -y autoremove && \
   apt-get autoclean
 
