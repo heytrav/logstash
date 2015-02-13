@@ -17,7 +17,6 @@ RUN \
     >> /etc/apt/sources.list && \
   apt-get -qq update && \
   apt-get -qy install supervisor \
-                      logstash \
                       logstash-contrib \
                       curl \
                       python-pip \
@@ -26,6 +25,14 @@ RUN \
   pip install -I elasticsearch-curator &&  \
   apt-get -y autoremove && \
   apt-get autoclean
+
+RUN \
+  cd / && \
+  curl -O https://download.elasticsearch.org/logstash/logstash/logstash-$LOGSTASH_VERSION.tar.gz && \
+  tar zxf logstash-$LOGSTASH_VERSION.tar.gz && \
+  mv logstash-$LOGSTASH_VERSION /opt/logstash && \
+  rm -f logstash-$LOGSTASH_VERSION.tar.gz && \
+
 
 ADD supervisord.conf /etc/supervisor/conf.d/
 ADD crons/ /etc/cron.hourly/
