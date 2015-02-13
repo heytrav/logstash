@@ -10,19 +10,11 @@ ENV LOGSTASH_VERSION 1.4.2
 RUN \
   apt-get -qq update && \
   apt-get -qy install wget --no-install-recommends && \
-  wget -qO - http://packages.elasticsearch.org/GPG-KEY-elasticsearch | apt-key add - && \
-  echo 'deb http://packages.elasticsearch.org/elasticsearch/1.3/debian stable main' \
-    >> /etc/apt/sources.list && \
-  echo 'deb http://packages.elasticsearch.org/logstash/1.4/debian stable main' \
-    >> /etc/apt/sources.list && \
   apt-get -qq update && \
   apt-get -qy install supervisor \
-                      logstash-contrib \
                       curl \
-                      python-pip \
                       unzip \
                       inotify-tools && \
-  pip install -I elasticsearch-curator &&  \
   apt-get -y autoremove && \
   apt-get autoclean
 
@@ -32,6 +24,10 @@ RUN \
   tar zxf logstash-$LOGSTASH_VERSION.tar.gz && \
   mv logstash-$LOGSTASH_VERSION /opt/logstash && \
   rm -f logstash-$LOGSTASH_VERSION.tar.gz && \
+  cd /opt && \
+  curl -O http://download.elasticsearch.org/logstash/logstash/logstash-contrib-$LOGSTASH_VERSION.tar.gz && \
+   tar xzf  logstash-contrib-$LOGSTASH_VERSION.tar.gz -C logstash --strip-components=1
+
 
 
 ADD supervisord.conf /etc/supervisor/conf.d/
