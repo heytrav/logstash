@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM dockerfile/java:oracle-java8
 MAINTAINER Travis Holton <travis@ideegeo.com>
 
 RUN echo '#!/bin/sh\nexit 101' > /usr/sbin/policy-rc.d && \
@@ -12,24 +12,19 @@ RUN \
   apt-get -qy install wget --no-install-recommends && \
   apt-get -qq update && \
   apt-get -qy install supervisor \
-                    openjdk-7-jdk \
                       curl \
                       unzip \
                       inotify-tools && \
   apt-get -y autoremove && \
-  apt-get autoclean
-
-RUN \
-  cd / && \
+  apt-get autoclean && cd / && \
   curl -O https://download.elasticsearch.org/logstash/logstash/logstash-$LOGSTASH_VERSION.tar.gz && \
   tar zxf logstash-$LOGSTASH_VERSION.tar.gz && \
   mv logstash-$LOGSTASH_VERSION /opt/logstash && \
   rm -f logstash-$LOGSTASH_VERSION.tar.gz && \
   cd /opt && \
   curl -O http://download.elasticsearch.org/logstash/logstash/logstash-contrib-$LOGSTASH_VERSION.tar.gz && \
-   tar xzf  logstash-contrib-$LOGSTASH_VERSION.tar.gz -C logstash --strip-components=1
-
-
+  tar xzf  logstash-contrib-$LOGSTASH_VERSION.tar.gz -C logstash --strip-components=1 && \
+  rm -f logstash-contrib-$LOGSTASH_VERSION.tar.gz
 
 ADD supervisord.conf /etc/supervisor/conf.d/
 ADD crons/ /etc/cron.hourly/
