@@ -12,6 +12,7 @@ RUN \
   apt-get -qy install wget --no-install-recommends && \
   apt-get -qq update && \
   apt-get -qy install supervisor \
+                      python-pip \
                       curl \
                       unzip \
                       inotify-tools && \
