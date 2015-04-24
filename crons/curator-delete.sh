@@ -1,3 +1,3 @@
 #!/bin/bash
 
-curator --host $ELASTICSEARCH_SERVICE_HOST delete --older-than $ES_CURATOR_DELETE_DAYS
+curator --host 127.0.0.1 delete --older-than $ES_CURATOR_DELETE_DAYS
