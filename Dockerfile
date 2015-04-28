@@ -5,7 +5,6 @@ RUN echo '#!/bin/sh\nexit 101' > /usr/sbin/policy-rc.d && \
     chmod +x /usr/sbin/policy-rc.d
 
 ENV LOGSTASH_VERSION 1.5.0-rc3
-ENV LOGSTASH_CONTRIB 1.4.2
 
 # Install Required Dependancies
 RUN \
@@ -23,11 +22,9 @@ RUN \
   curl -O https://download.elasticsearch.org/logstash/logstash/logstash-$LOGSTASH_VERSION.tar.gz && \
   tar zxf logstash-$LOGSTASH_VERSION.tar.gz && \
   mv logstash-$LOGSTASH_VERSION /opt/logstash && \
-  rm -f logstash-$LOGSTASH_VERSION.tar.gz && \
-  cd /opt && \
-  curl -O http://download.elasticsearch.org/logstash/logstash/logstash-contrib-$LOGSTASH_CONTRIB.tar.gz && \
-  tar xzf  logstash-contrib-$LOGSTASH_CONTRIB.tar.gz -C logstash --strip-components=1 && \
-  rm -f logstash-contrib-$LOGSTASH_CONTRIB.tar.gz
+  rm -f logstash-$LOGSTASH_VERSION.tar.gz && 
+
+RUN cd /opt/logstash && bin/plugin install logstash-filter-elapsed 
 
 ADD supervisord.conf /etc/supervisor/conf.d/
 ADD crons/ /etc/cron.hourly/
