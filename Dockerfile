@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM java:8u45-jre
 MAINTAINER Travis Holton <travis@ideegeo.com>
 
 RUN echo '#!/bin/sh\nexit 101' > /usr/sbin/policy-rc.d && \
@@ -7,10 +7,10 @@ RUN echo '#!/bin/sh\nexit 101' > /usr/sbin/policy-rc.d && \
 ENV LOGSTASH_VERSION 1.5.0-rc4
 
 # Install latest Java
-RUN apt-get -qq update && \
-    apt-get -qy install software-properties-common && apt-get -qq update
-RUN add-apt-repository -y ppa:webupd8team/java && apt-get -qq update
-RUN apt-get -qy install oracle-java8-installer
+#RUN apt-get -qq update && \
+    #apt-get -qy install software-properties-common && apt-get -qq update
+#RUN add-apt-repository -y ppa:webupd8team/java && apt-get -qq update
+#RUN apt-get -qy install oracle-java8-installer
 
 # Install Required Dependancies
 RUN apt-get -qq update && \
