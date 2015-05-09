@@ -24,7 +24,7 @@ RUN \
   mv logstash-$LOGSTASH_VERSION /opt/logstash && \
   rm -f logstash-$LOGSTASH_VERSION.tar.gz
 
-RUN cd /opt/logstash && bin/plugin install logstash-filter-elapsed 
+RUN cd /opt/logstash && bin/plugin install logstash-filter-elapsed
 
 ADD supervisord.conf /etc/supervisor/conf.d/
 ADD crons /etc/cron.hourly/
@@ -32,7 +32,7 @@ ADD logstash /etc/logstash/
 
 VOLUME ["/etc/logstash/conf.d"]
 
-EXPOSE 22 5043  25826 
+EXPOSE 22 5043  25826
 WORKDIR /usr/local
 ADD docker_start.sh /usr/local/
 
