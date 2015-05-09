@@ -9,7 +9,8 @@ ENV LOGSTASH_VERSION 1.5.0-rc4
 # Install Required Dependancies
 RUN \
   apt-get -qq update && \
-  apt-get -qy install wget --no-install-recommends && \
+  apt-get -qy install software-properties-common wget --no-install-recommends && \
+  apt-get update && \
   add-apt-repository -y ppa:webupd8team/java && \
   apt-get -qq update && \
   apt-get -qy install supervisor \
