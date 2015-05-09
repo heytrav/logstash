@@ -1,4 +1,4 @@
-FROM dockerfile/java:oracle-java8
+FROM debian:latest
 MAINTAINER Travis Holton <travis@ideegeo.com>
 
 RUN echo '#!/bin/sh\nexit 101' > /usr/sbin/policy-rc.d && \
@@ -10,10 +10,12 @@ ENV LOGSTASH_VERSION 1.5.0-rc4
 RUN \
   apt-get -qq update && \
   apt-get -qy install wget --no-install-recommends && \
+  add-apt-repository -y ppa:webupd8team/java && \
   apt-get -qq update && \
   apt-get -qy install supervisor \
                       python-pip \
                       curl \
+                      oracle-java8-installer \
                       unzip \
                       inotify-tools && \
   pip install -I elasticsearch-curator &&  \
