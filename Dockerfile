@@ -25,7 +25,7 @@ RUN apt-get -y autoremove
 
 RUN cd / && \
   curl -O https://download.elasticsearch.org/logstash/logstash/logstash-$LOGSTASH_VERSION.tar.gz && \
-  tar zxf logstash-$LOGSTASH_VERSION.tar.gz && \
+  tar -zxf logstash-$LOGSTASH_VERSION.tar.gz && \
   mv logstash-$LOGSTASH_VERSION /opt/logstash && \
   rm -f logstash-$LOGSTASH_VERSION.tar.gz
 
