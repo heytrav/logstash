@@ -1,4 +1,4 @@
-FROM dockerfile/java:openjdk-8u45-jre
+FROM java:openjdk-8u45-jre
 MAINTAINER Travis Holton <travis@ideegeo.com>
 
 RUN echo '#!/bin/sh\nexit 101' > /usr/sbin/policy-rc.d && \
