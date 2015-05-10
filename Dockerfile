@@ -21,7 +21,7 @@ RUN apt-get -qq update && \
                       unzip \
                       inotify-tools
 RUN pip install -I elasticsearch-curator
-RUN apt-get -y autoremove apt-get autoclean 
+RUN apt-get -y autoremove
 
 RUN cd / && \
   curl -O https://download.elasticsearch.org/logstash/logstash/logstash-$LOGSTASH_VERSION.tar.gz && \
