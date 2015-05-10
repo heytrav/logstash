@@ -1,28 +1,31 @@
-FROM debian:latest
+FROM java:openjdk-8u45-jre
 MAINTAINER Travis Holton <travis@ideegeo.com>
 
 RUN echo '#!/bin/sh\nexit 101' > /usr/sbin/policy-rc.d && \
     chmod +x /usr/sbin/policy-rc.d
 
-ENV LOGSTASH_VERSION 1.5.0-rc4
+ENV LOGSTASH_VERSION 1.5.0-rc3
+
+# Install latest Java
+#RUN apt-get -qq update && \
+    #apt-get -qy install software-properties-common && apt-get -qq update
+#RUN add-apt-repository -y ppa:webupd8team/java && apt-get -qq update
+#RUN apt-get -qy install oracle-java8-installer
 
 # Install Required Dependancies
-RUN \
-  apt-get -qq update && \
-  apt-get -qy install wget --no-install-recommends && \
-  add-apt-repository -y ppa:webupd8team/java && \
-  apt-get -qq update && \
-  apt-get -qy install supervisor \
+RUN apt-get -qq update && \
+    apt-get -qy install  wget --no-install-recommends  \
+                      supervisor \
                       python-pip \
                       curl \
-                      oracle-java8-installer \
                       unzip \
-                      inotify-tools && \
-  pip install -I elasticsearch-curator &&  \
-  apt-get -y autoremove && \
-  apt-get autoclean && cd / && \
+                      inotify-tools
+RUN pip install -I elasticsearch-curator
+RUN apt-get -y autoremove
+
+RUN cd / && \
   curl -O https://download.elasticsearch.org/logstash/logstash/logstash-$LOGSTASH_VERSION.tar.gz && \
-  tar zxf logstash-$LOGSTASH_VERSION.tar.gz && \
+  tar -zxf logstash-$LOGSTASH_VERSION.tar.gz && \
   mv logstash-$LOGSTASH_VERSION /opt/logstash && \
   rm -f logstash-$LOGSTASH_VERSION.tar.gz
 
