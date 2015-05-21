@@ -33,7 +33,6 @@ RUN cd / && \
 RUN cd /opt/logstash && bin/plugin install logstash-filter-elapsed 
 
 ADD supervisord.conf /etc/supervisor/conf.d/
-ADD crons /etc/cron.hourly/
 ADD logstash /etc/logstash/
 
 VOLUME ["/etc/logstash/conf.d"]
