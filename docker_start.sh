@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sed -i 's/HIPCHAT_TOKEN/'"$HIPCHAT_TOKEN"'/g' /etc/logstash/conf.d/syslog.conf
+
 
 if [ -n "$SSH_PASSWORD" ]; then
     echo "Configuring ssh: setting root password to ${SSH_PASSWORD}"
