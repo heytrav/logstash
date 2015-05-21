@@ -4,7 +4,7 @@ MAINTAINER Travis Holton <travis@ideegeo.com>
 RUN echo '#!/bin/sh\nexit 101' > /usr/sbin/policy-rc.d && \
     chmod +x /usr/sbin/policy-rc.d
 
-ENV LOGSTASH_VERSION 1.5.0-rc3
+ENV LOGSTASH_VERSION 1.5.0
 
 # Install latest Java
 #RUN apt-get -qq update && \
