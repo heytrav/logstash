@@ -21,7 +21,6 @@ RUN apt-get -qq update && \
                       openssh-server \
                       unzip \
                       inotify-tools
-RUN pip install -I elasticsearch-curator
 RUN mkdir -p /var/run/sshd
 RUN apt-get -y autoremove
 
