@@ -26,6 +26,8 @@ RUN cd / && \
   rm -f logstash-$LOGSTASH_VERSION.tar.gz
 
 RUN cd /opt/logstash && bin/plugin install logstash-filter-elapsed 
+RUN cd /opt/logstash && bin/plugin install logstash-output-datadog
+RUN cd /opt/logstash && bin/plugin install logstash-output-datadog_metrics
 
 ADD supervisord.conf /etc/supervisor/conf.d/
 ADD logstash /etc/logstash/
