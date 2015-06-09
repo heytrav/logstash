@@ -1,6 +1,7 @@
 #!/bin/bash
 
 sed -i 's/HIPCHAT_TOKEN/'"$HIPCHAT_TOKEN"'/g' /etc/logstash/conf.d/syslog.conf
+sed -i 's/DATADOG_API_KEY/'"$DATADOG_API_KEY"'/g' /etc/logstash/conf.d/syslog.conf
 
 
 if [ -n "$SSH_PASSWORD" ]; then
